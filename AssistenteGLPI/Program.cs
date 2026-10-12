@@ -8,7 +8,9 @@ using Google.GenAI.Types;
 
 class Program
 {
-    private static readonly string GlpiUrl = "https://glpi.comporte.com.br/apirest.php";
+    // URL da API do GLPI vem do ambiente (ex.: https://seu-glpi/apirest.php), nunca fixa no código
+    private static readonly string GlpiUrl = System.Environment.GetEnvironmentVariable("GLPI_URL")
+        ?? throw new InvalidOperationException("Defina a variável de ambiente GLPI_URL (ex.: https://seu-glpi/apirest.php).");
     // Correção 1: Uso explícito do System.Environment
     private static readonly string AppToken = System.Environment.GetEnvironmentVariable("GLPI_APP_TOKEN") ?? "coloque a api token do GLPI aqui";
     private static readonly string UserToken = System.Environment.GetEnvironmentVariable("GLPI_USER_TOKEN") ?? "coloque a api token do seu usuário GLPI aqui.";
